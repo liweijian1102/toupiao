@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>问卷系统</title>
+   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+   <script src="/static/js/jquery.min.js"></script>
+   <script src="/static/js/bootstrap.min.js"></script>
+ 
+   
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">问卷系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">全部</a></li>
+            <li><a href="#about">我的试卷</a></li>
+            <li><a href="#contact">创建试卷</a></li>
+             <li><a href="#contact">删除试卷</a></li>
+            
+          </ul>
+         
+          <ul class="nav navbar-nav navbar-right">
+       
+            <li class="dropdown">
+              <a href="http://v3.bootcss.com/examples/navbar-fixed-top/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% if user.is_authenticated %}
+              	{{user.username}}
+          {%else%}
+                 登录
+              {%endif%}<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+              
+                <li><a href="/logout/">退出</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+               
+              </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<div style="padding: 100px 100px 10px;">
+<div>
+
+{% for  content_list in content_list %}
+
+{{content_list.vote_bt}}</br>
+<input type="radio" name="dx{{content_list.id}}" >A.{{content_list.vote_a}}</br>
+<input type="radio" name="dx{{content_list.id}}" >B.{{content_list.vote_b}}</br>
+<input type="radio" name="dx{{content_list.id}}" >C.{{content_list.vote_c}}</br>
+<input type="radio" name="dx{{content_list.id}}" >D.{{content_list.vote_d}}<hr>
+{% endfor %}
+</div>
+
+
+<form class="bs-example bs-example-form" role="form" method="post"  action="/vote_single_add/">
+   <div class="col-md-3">
+   
+      <div class="input-group input-group-lg">
+         
+         <input type="text" class="form-control" placeholder="输入标题" name="vote_bt">
+        
+      </div><br>
+      <div class="input-group input-group-lg ">
+         
+         <input type="text" class="form-control" placeholder="选项A" name="vote_a" >
+         <input type="text" class="form-control" placeholder="选项B" name="vote_b">
+         <input type="text" class="form-control" placeholder="选项C" name="vote_c">
+         <input type="text" class="form-control" placeholder="选项D" name="vote_d">
+         <input type="text" class="form-control" placeholder="选项E" name="vote_e">
+         <input type="text" class="form-control" placeholder="选项F" name="vote_f">
+        
+      </div>
+      
+      <button class="btn btn-lg btn-primary btn-block " type="submit">添加题目</button>
+      </div>
+</form>
+</div>
+
+</body>
+</html>
+
+
